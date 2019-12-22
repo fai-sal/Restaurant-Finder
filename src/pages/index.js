@@ -1,8 +1,11 @@
 import React from 'react'
+import Restaurants from './restaurants'
+import Map from './map'
 export default function () {
     return (
         <div className="home">
-            <span className="title"> lets begin</span>
+            <Map />
+            <Restaurants />
         </div>
     )
 }
