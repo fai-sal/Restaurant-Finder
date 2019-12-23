@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {
-    Restaurant
+    Restaurant,
 } from '../components'
+import '../styles/restaurants.scss';
 
 export default function Restaurants({ restaurants }) {
-
 
     return (
         <div>
@@ -21,7 +21,7 @@ export default function Restaurants({ restaurants }) {
                 }
             </div>
         </div>
-    )
+    );
 
 }
 

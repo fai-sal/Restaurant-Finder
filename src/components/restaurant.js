@@ -1,21 +1,31 @@
 import React, { Fragment } from 'react'
 
-export default function Restaurant(props) {
+export default function Restaurant({ item }) {
 
     const {
         name,
+        icon,
         rating,
-        vicinity
-    } = props.item
+        vicinity,
+        photos,
+        opening_hours
+    } = item
 
+
+    // console.log('item : ',item)
+
+    if (opening_hours) {
+        console.log('is open : ', opening_hours.isOpen())
+    }
     return (
         <div className="restaurant">
-            {
-                <Fragment>
-                    <div>{name}</div>
-                    <div>{rating}</div>
-                    <div>{vicinity}</div>
-                </Fragment>}
+            <div className="title">
+                <img className="icon" src={icon} alt="icon" />
+                <span className="name"> {name}</span>
+            </div>
+            <div>{rating}</div>
+            <img src={photos[0].getUrl()} width={350} height={200} alt="image" />
+            <div className="address">{vicinity}</div>
         </div>
     )
 

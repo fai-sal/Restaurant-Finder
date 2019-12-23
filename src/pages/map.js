@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/map.scss';
-export default function Map({ location, getCurrentLocation, setLocation }) {
-
+export default function Map({ location, getCurrentLocation, setLocation, radius }) {
     const mapRef = useRef(null)
     const searchBox = useRef(null)
     useEffect(() => {
@@ -9,15 +8,20 @@ export default function Map({ location, getCurrentLocation, setLocation }) {
     })
 
     const initGoogleMap = () => {
-        let myLatlng = new window.google.maps.LatLng(23.7813293, 90.40274978)
+        let myLatlng = new window.google.maps.LatLng(location.latitude, location.longitude)
         let map = new window.google.maps.Map(mapRef.current, {
             zoom: 16,
             center: new window.google.maps.LatLng(location.latitude, location.longitude)
         });
         let marker = new window.google.maps.Marker({
             position: myLatlng,
-            title: "Current Location"
+            title: "Current Location",
+            // draggable: true,
         })
+        // marker.addListener('dragend', () => {
+        //     console.log(marker.getPosition().lat())
+        //     console.log(marker.getPosition().lng())
+        // })
         marker.setMap(map)
         initSearchBox()
     }
@@ -42,11 +46,9 @@ export default function Map({ location, getCurrentLocation, setLocation }) {
 
     return (
         <div>
-
             <input ref={searchBox} type="text" placeholder="Search location" />
-            <div className="map-container" ref={mapRef} />
-
             <div onClick={() => getCurrentLocation()}>current location</div>
+            <div className="map-container" ref={mapRef} />
         </div>
 
     )

@@ -4,8 +4,9 @@ import Map from './map';
 export default function () {
     const [restaurants, setRestaurants] = useState(null)
     const [location, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 })
+    const [radius, setRadius] = useState(3000)
     useEffect(() => {
-        if (restaurants == null) {
+        if (restaurants === null) {
             findRestaurants()
         }
     })
@@ -20,7 +21,7 @@ export default function () {
                 lat: location.latitude,
                 lng: location.longitude,
             },
-            radius: '3000',
+            radius: radius,
             type: ['restaurant']
         }
         service.nearbySearch(request, (results, status) => {
@@ -48,6 +49,7 @@ export default function () {
                 restaurants={restaurants}
                 getCurrentLocation={getCurrentLocation}
                 setLocation={setLocation}
+                radius={radius}
             />
             <Restaurants
                 restaurants={restaurants}
