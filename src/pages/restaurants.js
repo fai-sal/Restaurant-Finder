@@ -1,36 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 
 import {
     Restaurant
 } from '../components'
 
-function Restaurants() {
-    const [restaurants, setRestaurants] = useState(null)
+export default function Restaurants({ restaurants }) {
 
-    useEffect(() => {
-        if (restaurants == null) {
-            findRestaurants()
-        }
-
-    })
-
-    const findRestaurants = () => {
-        const service = new window.google.maps.places.PlacesService(document.getElementById('map'))
-        var request = {
-            location: {
-                lat: 23.75090,
-                lng: 90.38426,
-            },
-            radius: '3000',
-            type: ['restaurant']
-        }
-        service.nearbySearch(request, (results, status) => {
-            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                setRestaurants(results)
-            }
-        })
-
-    }
 
     return (
         <div>
@@ -49,5 +24,5 @@ function Restaurants() {
     )
 
 }
-export default Restaurants
+
 
