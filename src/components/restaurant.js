@@ -24,7 +24,9 @@ export default function Restaurant({ item }) {
                 <span className="name"> {name}</span>
             </div>
             <div>{rating}</div>
-            <img src={photos[0].getUrl()} width={350} height={200} alt="image" />
+            {
+                photos && <img src={photos} width={350} height={200} alt="image" />
+            }
             <div className="address">{vicinity}</div>
         </div>
     )

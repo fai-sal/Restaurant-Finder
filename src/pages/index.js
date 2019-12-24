@@ -22,11 +22,29 @@ export default function () {
                 lng: location.longitude,
             },
             radius: radius,
-            type: ['restaurant']
+            type: ['restaurant'],
+            rankby: 'distance'
         }
         service.nearbySearch(request, (results, status) => {
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                setRestaurants(results)
+                setRestaurants(results.map(({ icon, name, photos, price_level, rating, vicinity, geometry, opening_hours, reference }) => {
+                    return (
+                        {
+                            icon,
+                            name,
+                            photos: photos ? photos[0].getUrl() : null,
+                            price_level,
+                            rating,
+                            vicinity,
+                            reference,
+                            location: {
+                                lat: geometry.location.lat(),
+                                lng: geometry.location.lng(),
+                            },
+                            // ..(opening_hours && { isOpen: opening_hours.isOpen ? opening_hours.isOpen() : opening_hours.open_now })
+                        }
+                    )
+                }));
             }
         })
 
