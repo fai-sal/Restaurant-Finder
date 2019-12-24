@@ -13,10 +13,10 @@ export default function Map({ location, getCurrentLocation, setLocation, restaur
     const initGoogleMap = () => {
         let myLatlng = new google.maps.LatLng(location.latitude, location.longitude)
         let map = new google.maps.Map(mapRef.current, {
-            zoom: 16,
+            zoom: 15,
             center: new google.maps.LatLng(location.latitude, location.longitude)
         });
-        let locationMarker = new google.maps.Marker({
+        new google.maps.Marker({
             position: myLatlng,
             title: "Current Location",
             map: map
@@ -74,7 +74,7 @@ export default function Map({ location, getCurrentLocation, setLocation, restaur
                     className="current-location"
                     onClick={() => getCurrentLocation()}>
                     <span>  Use current location</span>
-                    <img src={currentLocation} className="current-location-icon" />
+                    <img src={currentLocation} className="current-location-icon" alt="get-location" />
                 </div>
             </div>
             <div className="map-container" ref={mapRef} />

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 export default function Restaurant({ item }) {
 
@@ -25,7 +25,7 @@ export default function Restaurant({ item }) {
             </div>
             <div>{rating}</div>
             {
-                photos && <img src={photos} width={350} height={200} alt="image" />
+                photos && <img src={photos} width={350} height={200} alt="img" />
             }
             <div className="address">{vicinity}</div>
         </div>

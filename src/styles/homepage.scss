@@ -1,0 +1,74 @@
+.home {
+  .header {
+    font-size: 25px;
+    line-height: 1.3;
+    width: 85%;
+    margin: 0px auto;
+  }
+  .search-restaurants {
+    width: 85%;
+    margin: 60px auto 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
+    -webkit-transition: border-color 0.4s, background-color 0.4s, -webkit-box-shadow 0.4s;
+    transition: border-color 0.4s, background-color 0.4s, box-shadow 0.4s;
+    transition: border-color 0.4s, background-color 0.4s, box-shadow 0.4s, -webkit-box-shadow 0.4s;
+    &:hover {
+      box-shadow: 0px 30px 30px -20px rgba(0, 0, 0, 0.15);
+    }
+    .restaurants-search-input {
+      width: 40%;
+      border-width: 1px;
+      border-radius: 4px;
+      border-color: #cfd8e3;
+      border-style: solid;
+      color: #a5b6c9;
+      background-color: #f8f9fd;
+      padding: 12px 15px 12px 15px;
+      &:focus {
+        outline: 0;
+        color: #495057;
+        background-color: #fff;
+      }
+      &:hover {
+        color: #495057;
+      }
+    }
+    .radius-field {
+      width: 40%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-evenly;
+      .label{
+        font-weight: 600;
+      }
+      .distance{
+        font-weight: 400;
+      }
+      input[type="range"] {
+          width: 70%;
+        &:focus {
+          outline: none;
+        }
+        &::-webkit-slider-runnable-track {
+          height: 8.4px;
+          box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+          background: #3071a9;
+          border-radius: 1.3px;
+          border: 0.2px solid #010101;
+        }
+        &::-webkit-slider-thumb {
+          box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+          border: 1px solid #000000;
+          height: 36px;
+          width: 16px;
+          border-radius: 3px;
+          background: #feffff;
+          -webkit-appearance: none;
+          margin-top: -5px;
+        }
+      }
+    }
+  }
+}
