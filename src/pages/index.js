@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Map from './map';
+// import Map from './map';
 import {
-    Restaurants,
-} from '../components'
+    Map,
+    Restaurants
+} from '../components';
 import '../styles/homepage.scss';
 export default function () {
     const [restaurants, setRestaurants] = useState(null);
