@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-// import Map from './map';
 import {
     Map,
     Restaurants
 } from '../components';
+import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/homepage.scss';
+
 export default function () {
     const [restaurants, setRestaurants] = useState(null);
     const [restaurantName, changeRestaurantName] = useState('');
-    const [location, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 });
+    const [userLocation, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 });
     const [radius, setRadius] = useState(3000);
 
     useEffect(() => {
@@ -16,8 +17,8 @@ export default function () {
             const service = new window.google.maps.places.PlacesService(document.getElementById('map'));
             var request = {
                 location: {
-                    lat: location.latitude,
-                    lng: location.longitude,
+                    lat: userLocation.latitude,
+                    lng: userLocation.longitude,
                 },
                 radius: radius,
                 type: ['restaurant'],
@@ -25,13 +26,14 @@ export default function () {
                 name: restaurantName
             };
             service.nearbySearch(request, (results, status, PlaceSearchPagination) => {
-                // console.log('results : ', results)
+                console.log('results : ', results)
                 // console.log('PlaceSearchPagination : ', PlaceSearchPagination)
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     // console.log('results : ', results)
-                    setRestaurants(results.map(({ icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
+                    setRestaurants(results.map(({ id, icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
                         return (
                             {
+                                id,
                                 icon,
                                 name,
                                 photos: photos ? photos[0].getUrl() : null,
@@ -55,7 +57,7 @@ export default function () {
 
         }
         findRestaurants();
-    }, [location, radius, restaurantName]);
+    }, [userLocation, radius, restaurantName]);
 
 
 
@@ -71,7 +73,7 @@ export default function () {
     return (
         <div className="home">
             <Map
-                location={location}
+                userLocation={userLocation}
                 restaurants={restaurants}
                 getCurrentLocation={getCurrentLocation}
                 setLocation={setLocation}
@@ -86,7 +88,7 @@ export default function () {
                 </div>
             </div>
             <h3 className="header">  Available Restaurants  </h3>
-            <Restaurants restaurants={restaurants} />
+            <Restaurants restaurants={restaurants} userLocation={userLocation} />
         </div>
     );
 }
