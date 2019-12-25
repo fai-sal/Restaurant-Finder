@@ -1,5 +1,5 @@
-import Restaurant from './restaurant'
+import Restaurants from './restaurants'
 
 export {
-    Restaurant
+    Restaurants
 }

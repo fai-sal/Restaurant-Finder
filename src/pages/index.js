@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Restaurants from './restaurants';
 import Map from './map';
+import {
+    Restaurants,
+} from '../components'
 import '../styles/homepage.scss';
 export default function () {
     const [restaurants, setRestaurants] = useState(null);
@@ -22,11 +24,11 @@ export default function () {
                 name: restaurantName
             };
             service.nearbySearch(request, (results, status, PlaceSearchPagination) => {
-                console.log('results : ', results)
-                console.log('PlaceSearchPagination : ', PlaceSearchPagination)
+                // console.log('results : ', results)
+                // console.log('PlaceSearchPagination : ', PlaceSearchPagination)
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                    console.log('results : ', results)
-                    setRestaurants(results.map(({ icon, name, photos, price_level, rating, vicinity, geometry, opening_hours, reference }) => {
+                    // console.log('results : ', results)
+                    setRestaurants(results.map(({ icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
                         return (
                             {
                                 icon,
@@ -34,6 +36,7 @@ export default function () {
                                 photos: photos ? photos[0].getUrl() : null,
                                 price_level,
                                 rating,
+                                user_ratings_total,
                                 vicinity,
                                 reference,
                                 location: {
@@ -82,9 +85,7 @@ export default function () {
                 </div>
             </div>
             <h3 className="header">  Available Restaurants  </h3>
-            <Restaurants
-                restaurants={restaurants}
-            />
+            <Restaurants restaurants={restaurants} />
         </div>
     );
 }
