@@ -13,7 +13,7 @@ export default function () {
     const [restaurantName, changeRestaurantName] = useState('');
     const [userLocation, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 });
     const [radius, setRadius] = useState(3000);
-   
+
     useEffect(() => {
 
         const findRestaurants = () => {
@@ -25,12 +25,13 @@ export default function () {
                 },
                 radius: radius,
                 type: ['restaurant'],
-                // rankby: 'distance',
                 name: restaurantName
             };
             service.nearbySearch(request, (results, status, PlaceSearchPagination) => {
                 if (PlaceSearchPagination.hasNextPage) {
                     setPagination(PlaceSearchPagination)
+                } else {
+                    setPagination(null)
                 }
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     setRestaurants(results.map(({ id, icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
@@ -91,8 +92,12 @@ export default function () {
                 <span className="restaurants">  Available Restaurants  </span>
                 {(pagination && pagination.hasNextPage) && < span className="next-button" onClick={() => pagination.nextPage()}>More Restaurants</span>}
             </div>
-
-            <Restaurants restaurants={restaurants} userLocation={userLocation} />
+            {
+                restaurants === null ?
+                    <div> loading..  </div>
+                    :
+                    <Restaurants restaurants={restaurants} userLocation={userLocation} />
+            }
         </div >
     );
 }

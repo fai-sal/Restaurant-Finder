@@ -9,21 +9,23 @@
 
 ### Features
   - Search/set location of user
-  - Displays available restaurants in `map` inside predefined radius
+  - Displays available restaurants in `Google map` inside predefined radius
   - Search Restaurants by name
   - Set radius for search
   - Gives direction of selected restaurant in `Google map` 
 
-### Run/Build instructions
+### Run/Build Instructions
   - `node` and `git` must have been installed  
-  - Run `https://github.com/FaisalAhmedBD/Restaurant-Finder.git` to clone the repository 
+  - Run `git clone https://github.com/FaisalAhmedBD/Restaurant-Finder.git` to clone the repository 
   - Run `npm install` to install all the dependencies  
   - Run `npm start` to run the project locally
   - Run `npm run build` to build
 
-#### project structure 
+### Project Structure 
 
-This project was created using `create-react-app` and `node-sass` has been installed as third-party library for compiling `.scss` files to css.
+This project was created using `create-react-app`.`node-sass` has been installed as third-party library for compiling `.scss` files to css and `bootstrap` has been used to maintain `grid`.
+
+#### Folder Structure
 
 ```
 Restaurant-Finder
@@ -49,7 +51,8 @@ Restaurant-Finder
     └── serviceWorker.js
 ```
 ### Trade-offs
-  - Search by keywords (chinese, asian) couldn't be implemenetd as I was using `google places API` free version, this feature can be easily implemented using `Foursquare Places API`. 
+  - Random Selection of restaurant not implemented 
+  - Search by keywords (chinese, asian) couldn't be implemenetd as I was using `google places API` free version, this feature can be easily implemented using `Foursquare Places API`
   
   A simple demonstration is shown bellow - 
 
@@ -68,7 +71,7 @@ const userLocation={
   lat:23.7815222,
   lng:90.4004866
 };
-let radius=3000;
+let radius=3000, restaurantCat='chinese';
  const findRestaurants = () => {
         const key = "CLIENT_ID";
         const secret = "CLIENT_KEY";

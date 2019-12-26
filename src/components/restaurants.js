@@ -17,10 +17,8 @@ export default function Restaurants({ restaurants, userLocation }) {
         <div className="container-fluid all-restaurants">
             <div id="map" />
             {
-                restaurants == null ?
-                    <div>
-                        loading..
-                </div>
+                restaurants.length === 0 ?
+                    <div>   No restaurants found in selected area  </div>
                     :
                     restaurants.map(restaurant => {
                         const { id, name, rating, user_ratings_total, vicinity, photos, location, price_level, reference } = restaurant

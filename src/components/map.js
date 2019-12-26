@@ -1,6 +1,5 @@
-
-import React, { useEffect, useRef, Fragment } from 'react';
 import '../styles/map.scss';
+import React, { useEffect, useRef, Fragment } from 'react';
 import currentLocation from '../assets/currentLocation.svg';
 import restaurantIcon from '../assets/restaurantMarker.svg';
 const { google } = window;
