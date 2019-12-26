@@ -18,6 +18,11 @@
       position: relative;
       .modal {
         position: absolute;
+        .modal-location {
+          font-size: 16px;
+          line-height: 1.64em;
+          padding: 10px 20px;
+        }
       }
     }
     &:hover {
@@ -32,8 +37,8 @@
         line-height: 1.7em;
         font-weight: 600;
       }
-      .direction{
-        color: #1A73E8;
+      .direction {
+        color: #1a73e8;
         font-size: 16px;
         line-height: 1em;
         font-weight: 600;

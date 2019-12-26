@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Map from './map';
 export default function Modal({ toogleModal, restaurant, restaurantLocation, userLocation }) {
-    const { id, name, rating, user_ratings_total, vicinity, photos, opening_hours, price_level, reference } = restaurant;
+    const { name, vicinity } = restaurant;
     return (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block', cursor: 'auto' }} >
             <div className="modal-dialog modal-lg" role="document">
@@ -18,7 +18,7 @@ export default function Modal({ toogleModal, restaurant, restaurantLocation, use
                             restaurantLocation={restaurantLocation}
                             getDirection
                         />
-                        <p>{vicinity}</p>
+                        <p classname="modal-location"> Location : {vicinity}</p>
                     </div>
                 </div>
             </div>

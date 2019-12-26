@@ -23,7 +23,7 @@ export default function Restaurants({ restaurants, userLocation }) {
                 </div>
                     :
                     restaurants.map(restaurant => {
-                        const { id, name, rating, user_ratings_total, vicinity, photos, location, isOpen, price_level, reference } = restaurant
+                        const { id, name, rating, user_ratings_total, vicinity, photos, location, price_level, reference } = restaurant
                         const displayDetails = (showModal && activeRestaurant === id)
                         return (
                             <div className={`restaurant col-xl-4 col-lg-6 col-sm-12 ${displayDetails ? 'modal-parent' : ''}`} key={reference}>

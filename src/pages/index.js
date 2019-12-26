@@ -13,8 +13,9 @@ export default function () {
     const [restaurantName, changeRestaurantName] = useState('');
     const [userLocation, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 });
     const [radius, setRadius] = useState(3000);
-
+   
     useEffect(() => {
+
         const findRestaurants = () => {
             const service = new window.google.maps.places.PlacesService(document.getElementById('map'));
             var request = {
