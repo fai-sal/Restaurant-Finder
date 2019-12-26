@@ -23,17 +23,17 @@ export default function Restaurants({ restaurants, userLocation }) {
                 </div>
                     :
                     restaurants.map(restaurant => {
-                        const { id, name, rating, user_ratings_total, vicinity, photos, location, opening_hours, price_level, reference } = restaurant
-                        const displayDetails = (showModal && activeRestaurant == id)
+                        const { id, name, rating, user_ratings_total, vicinity, photos, location, isOpen, price_level, reference } = restaurant
+                        const displayDetails = (showModal && activeRestaurant === id)
                         return (
-                            <div className={`restaurant col-xl-4 col-lg-6 col-sm-12 ${displayDetails ? 'modal-parent' : ''}`} key={reference} onClick={() => handleModal(id)}>
+                            <div className={`restaurant col-xl-4 col-lg-6 col-sm-12 ${displayDetails ? 'modal-parent' : ''}`} key={reference}>
                                 {displayDetails && <Modal restaurant={restaurant} restaurantLocation={location} userLocation={userLocation} toogleModal={handleModal} />}
 
                                 <div className="title">
                                     <span className="name"> {name}</span>
+                                    <span className="direction" onClick={() => handleModal(id)}> Get Direction</span>
                                 </div>
                                 {
-
                                     rating &&
                                     <div className="ratings">
                                         <span className="number">{rating}</span>

@@ -1,5 +1,5 @@
 
-## Restaurant Finder
+# Restaurant Finder
 
 This project was created using `create-react-app`
 
@@ -7,7 +7,7 @@ This project was created using `create-react-app`
   - Reactjs
 
 
-# Run/Build instruction
+## Run/Build instructions
 - `node` and `git` must have been installed  
 - Run `https://github.com/FaisalAhmedBD/Restaurant-Finder.git` to clone the repository 
 - Run `npm install` to install all the dependencies  

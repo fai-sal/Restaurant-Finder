@@ -3,11 +3,13 @@ import {
     Map,
     Restaurants
 } from '../components';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/homepage.scss';
 
 export default function () {
-    const [restaurants, setRestaurants] = useState(null);
+    const [restaurants, setRestaurants] = useState([]);
+    const [pagination, setPagination] = useState(null);
     const [restaurantName, changeRestaurantName] = useState('');
     const [userLocation, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 });
     const [radius, setRadius] = useState(3000);
@@ -26,10 +28,10 @@ export default function () {
                 name: restaurantName
             };
             service.nearbySearch(request, (results, status, PlaceSearchPagination) => {
-                console.log('results : ', results)
-                // console.log('PlaceSearchPagination : ', PlaceSearchPagination)
+                if (PlaceSearchPagination.hasNextPage) {
+                    setPagination(PlaceSearchPagination)
+                }
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                    // console.log('results : ', results)
                     setRestaurants(results.map(({ id, icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
                         return (
                             {
@@ -46,7 +48,7 @@ export default function () {
                                     lat: geometry.location.lat(),
                                     lng: geometry.location.lng(),
                                 },
-                                // ..(opening_hours && { isOpen: opening_hours.isOpen ? opening_hours.isOpen() : opening_hours.open_now })
+                                isOpen: opening_hours ? opening_hours.isOpen ? opening_hours.isOpen() : opening_hours.open_now : undefined
                             }
                         );
                     }));
@@ -59,8 +61,6 @@ export default function () {
         findRestaurants();
     }, [userLocation, radius, restaurantName]);
 
-
-
     const getCurrentLocation = () => {
         if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
@@ -68,7 +68,6 @@ export default function () {
             });
         }
     }
-
 
     return (
         <div className="home">
@@ -87,8 +86,12 @@ export default function () {
                     <span className="distance">{(radius / 1000).toFixed(2)} km</span>
                 </div>
             </div>
-            <h3 className="header">  Available Restaurants  </h3>
+            <div className="header" >
+                <span className="restaurants">  Available Restaurants  </span>
+                {(pagination && pagination.hasNextPage) && < span className="next-button" onClick={() => pagination.nextPage()}>More Restaurants</span>}
+            </div>
+
             <Restaurants restaurants={restaurants} userLocation={userLocation} />
-        </div>
+        </div >
     );
 }

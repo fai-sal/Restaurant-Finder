@@ -8,7 +8,7 @@
     padding: 30px;
     margin: 30px;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: auto;
     background-color: #ffffff;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
     -webkit-transition: border-color 0.4s, background-color 0.4s, -webkit-box-shadow 0.4s;
@@ -24,15 +24,20 @@
       box-shadow: 0px 30px 30px -20px rgba(0, 0, 0, 0.15);
     }
     .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       .name {
         font-size: 20px;
         line-height: 1.7em;
         font-weight: 600;
       }
-      .icon {
-        width: 30px;
-        height: auto;
-        display: inline-block;
+      .direction{
+        color: #1A73E8;
+        font-size: 16px;
+        line-height: 1em;
+        font-weight: 600;
+        cursor: pointer;
       }
     }
     .ratings {
@@ -41,9 +46,11 @@
       span {
         &.number {
           margin-right: 10px;
+          vertical-align: middle;
         }
         &.total-ratings {
           margin-left: 10px;
+          vertical-align: middle;
         }
         &.price {
           margin-left: 10px;
@@ -52,7 +59,6 @@
       .rating-wrap {
         position: relative;
         display: inline-block;
-        vertical-align: middle;
         & img {
           width: 20px;
         }
@@ -60,7 +66,6 @@
           position: absolute;
           top: 0;
           left: 0;
-          // width: 70%;
           overflow: hidden;
           white-space: nowrap;
         }
