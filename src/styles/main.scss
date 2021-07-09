@@ -1,0 +1,11 @@
+// Common CSS
+@import "common.scss";
+
+// Component CSS
+@import "components/header.scss";
+@import "components/footer.scss";
+@import "components/map.scss";
+@import "components/restaurants.scss";
+
+//Pages CSS
+@import "pages/home.scss";

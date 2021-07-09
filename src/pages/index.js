@@ -5,9 +5,8 @@ import {
 } from '../components';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import '../styles/homepage.scss';
 
-export default function () {
+function Home() {
     const [restaurants, setRestaurants] = useState([]);
     const [pagination, setPagination] = useState(null);
     const [restaurantName, changeRestaurantName] = useState('');
@@ -16,51 +15,48 @@ export default function () {
 
     useEffect(() => {
 
-        const findRestaurants = () => {
-            const service = new window.google.maps.places.PlacesService(document.getElementById('map'));
-            var request = {
-                location: {
-                    lat: userLocation.latitude,
-                    lng: userLocation.longitude,
-                },
-                radius: radius,
-                type: ['restaurant'],
-                name: restaurantName
-            };
-            service.nearbySearch(request, (results, status, PlaceSearchPagination) => {
-                if (PlaceSearchPagination.hasNextPage) {
-                    setPagination(PlaceSearchPagination)
-                } else {
-                    setPagination(null)
-                }
-                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                    setRestaurants(results.map(({ id, icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
-                        return (
-                            {
-                                id,
-                                icon,
-                                name,
-                                photos: photos ? photos[0].getUrl() : null,
-                                price_level,
-                                rating,
-                                user_ratings_total,
-                                vicinity,
-                                reference,
-                                location: {
-                                    lat: geometry.location.lat(),
-                                    lng: geometry.location.lng(),
-                                },
-                                isOpen: opening_hours ? opening_hours.isOpen ? opening_hours.isOpen() : opening_hours.open_now : undefined
-                            }
-                        );
-                    }));
-                } else if (status === 'ZERO_RESULTS') {
-                    setRestaurants([]);
-                }
-            });
+        const service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+        var request = {
+            location: {
+                lat: userLocation.latitude,
+                lng: userLocation.longitude,
+            },
+            radius: radius,
+            type: ['restaurant'],
+            name: restaurantName
+        };
+        service.nearbySearch(request, (results, status, PlaceSearchPagination) => {
+            if (PlaceSearchPagination.hasNextPage) {
+                setPagination(PlaceSearchPagination)
+            } else {
+                setPagination(null)
+            }
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                setRestaurants(results.map(({ place_id, icon, name, photos, price_level, rating, user_ratings_total, vicinity, geometry, opening_hours, reference }) => {
+                    return (
+                        {
+                            id: place_id,
+                            icon,
+                            name,
+                            photos: photos ? photos[0].getUrl() : null,
+                            price_level,
+                            rating,
+                            user_ratings_total,
+                            vicinity,
+                            reference,
+                            location: {
+                                lat: geometry.location.lat(),
+                                lng: geometry.location.lng(),
+                            },
+                            isOpen: opening_hours ? opening_hours.isOpen ? opening_hours.isOpen() : opening_hours.open_now : undefined
+                        }
+                    );
+                }));
+            } else if (status === 'ZERO_RESULTS') {
+                setRestaurants([]);
+            }
+        });
 
-        }
-        findRestaurants();
     }, [userLocation, radius, restaurantName]);
 
     const getCurrentLocation = () => {
@@ -101,3 +97,5 @@ export default function () {
         </div >
     );
 }
+
+export default Home;

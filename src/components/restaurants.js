@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import classnames from 'classnames';
 import Modal from './modal';
 import Ratings from './ratings.js';
-import '../styles/restaurants.scss';
+
 export default function Restaurants({ restaurants, userLocation }) {
 
     const [showModal, toggleModal] = useState(false);
@@ -20,12 +21,15 @@ export default function Restaurants({ restaurants, userLocation }) {
                 restaurants.length === 0 ?
                     <div>   No restaurants found in selected area  </div>
                     :
-                    restaurants.map(restaurant => {
-                        const { id, name, rating, user_ratings_total, vicinity, photos, location, price_level, reference } = restaurant
-                        const displayDetails = (showModal && activeRestaurant === id)
+                    restaurants.map((restaurant) => {
+                        const { id, name, rating, user_ratings_total, vicinity, photos, location, price_level, reference } = restaurant;
+                        const restaurantClasses = classnames('restaurant',
+                            'col-xl-4 col-lg-6 col-sm-12', {
+                            'modal-parent': showModal && activeRestaurant === id
+                        });
                         return (
-                            <div className={`restaurant col-xl-4 col-lg-6 col-sm-12 ${displayDetails ? 'modal-parent' : ''}`} key={reference}>
-                                {displayDetails && <Modal restaurant={restaurant} restaurantLocation={location} userLocation={userLocation} toogleModal={handleModal} />}
+                            <div className={restaurantClasses} key={reference}>
+                                {(showModal && activeRestaurant === id) && <Modal restaurant={restaurant} restaurantLocation={location} userLocation={userLocation} toogleModal={handleModal} />}
 
                                 <div className="title">
                                     <span className="name"> {name}</span>
@@ -43,23 +47,17 @@ export default function Restaurants({ restaurants, userLocation }) {
                                         {
                                             price_level &&
                                             <span className="price">
-                                                {new Array(price_level).fill(0).map(item => '$')}
+                                                {new Array(price_level).fill(0).map(() => '$')}
                                             </span>
                                         }
-
                                     </div>
                                 }
-
-                                {
-                                    photos && <img src={photos} width={350} height={200} alt="img" />
-                                }
+                                {photos && <img src={photos} width={350} height={200} alt="img" />}
                                 <div className="address">{vicinity}</div>
                             </div>
                         )
                     })
             }
         </div>
-
-    )
-
+    );
 }

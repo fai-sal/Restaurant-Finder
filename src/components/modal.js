@@ -18,7 +18,7 @@ export default function Modal({ toogleModal, restaurant, restaurantLocation, use
                             restaurantLocation={restaurantLocation}
                             getDirection
                         />
-                        <p classname="modal-location"> Location : {vicinity}</p>
+                        <p className="modal-location"> Location : {vicinity}</p>
                     </div>
                 </div>
             </div>

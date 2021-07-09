@@ -1,0 +1,15 @@
+.footer {
+    background-color: #000;
+    padding: 20px 30px;
+    .footer-container {
+        min-height: 200px;
+        .footer-item {
+            color: #fff;
+            &.copyright {
+                margin: 0;
+                font-size: 0.875rem;
+                padding: 0px 30px;
+            }
+        }
+    }
+}

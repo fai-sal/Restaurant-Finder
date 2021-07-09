@@ -1,9 +1,15 @@
-import React from 'react';
-import './App.css';
+import React, { Fragment } from 'react';
+import './styles/main.scss';
+import { Header, Footer } from './components';
 import Pages from './pages';
+
 function App() {
   return (
-    <Pages />
+    <Fragment>
+      <Header />
+      <Pages />
+      <Footer />
+    </Fragment>
   );
 }
 

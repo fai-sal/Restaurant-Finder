@@ -1,10 +1,10 @@
-import '../styles/map.scss';
 import React, { useEffect, useRef, Fragment } from 'react';
+import classnames from 'classnames';
 import currentLocation from '../assets/currentLocation.svg';
 import restaurantIcon from '../assets/restaurantMarker.svg';
 const { google } = window;
 
-export default function Map({ userLocation, restaurantLocation, getCurrentLocation, setLocation, restaurants, getDirection }) {
+function Map({ userLocation, restaurantLocation, getCurrentLocation, setLocation, restaurants, getDirection }) {
 
     const mapRef = useRef(null);
     const searchBox = useRef(null);
@@ -105,8 +105,11 @@ export default function Map({ userLocation, restaurantLocation, getCurrentLocati
                 </div>
             }
 
-            <div className={`map-container${getDirection ? ' direction-map' : ''}`} ref={mapRef} />
+            <div className={classnames('map-container', { 'direction-map': getDirection })} ref={mapRef} />
         </Fragment>
 
     );
 }
+
+
+export default Map;
