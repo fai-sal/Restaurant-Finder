@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, Fragment } from 'react';
 import classnames from 'classnames';
+import deepEqual from 'deep-equal';
 import currentLocation from '../assets/currentLocation.svg';
 import restaurantIcon from '../assets/restaurantMarker.svg';
 const { google } = window;
@@ -110,6 +111,9 @@ function Map({ userLocation, restaurantLocation, getCurrentLocation, setLocation
 
     );
 }
+function areEqual(prevProps, nextProps) {
+    return deepEqual(prevProps.restaurants, nextProps.restaurants);
+}
 
 
-export default Map;
+export default React.memo(Map, areEqual);

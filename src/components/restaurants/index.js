@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card from './card';
-
+import deepEqual from 'deep-equal';
 /**
  * 
  * @returns Element
@@ -40,4 +40,9 @@ function Restaurants({ restaurants, userLocation }) {
     );
 }
 
-export default Restaurants;
+function areEqual(prevProps, nextProps) {
+    return deepEqual(prevProps.restaurants, nextProps.restaurants);
+}
+
+
+export default React.memo(Restaurants, areEqual);

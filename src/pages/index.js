@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 /**
  * local dependencies
  */
@@ -7,12 +7,29 @@ import {
     Restaurants
 } from '../components';
 
-
 function Home() {
     const [restaurants, setRestaurants] = useState([]);
     const [pagination, setPagination] = useState(null);
     const [searchParams, setSearchParams] = useState({ restaurant: '', radius: 3000 })
     const [userLocation, setLocation] = useState({ latitude: 23.7815222, longitude: 90.4004866 });
+
+    /**
+     * Set location to local Location
+     */
+    const getCurrentLocation = useCallback(() => {
+        if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setLocation(position.coords);
+            });
+        }
+    }, [])
+
+    /**
+     * Update location after mount
+     */
+    useEffect(() => {
+        getCurrentLocation();
+    }, [getCurrentLocation])
 
     useEffect(() => {
         const service = new window.google.maps.places.PlacesService(document.getElementById('map'));
@@ -65,16 +82,6 @@ function Home() {
         }))
     }
 
-    /**
-     * Set location to local Location
-     */
-    const getCurrentLocation = () => {
-        if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                setLocation(position.coords);
-            });
-        }
-    }
 
     return (
         <div className="home">
