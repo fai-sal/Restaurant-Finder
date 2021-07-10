@@ -8,7 +8,7 @@ export default function Modal({ toogleModal, restaurant, restaurantLocation, use
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{name}</h5>
-                        <button type="button" className="close" aria-label="Close" onClick={() => toogleModal('hide')}>
+                        <button type="button" className="close" aria-label="Close" onClick={() => toogleModal()}>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
