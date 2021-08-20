@@ -40,6 +40,7 @@ function Restaurants({ restaurants, userLocation }) {
     );
 }
 
+// for demonstration purpose React.memo isn't really very effective for these kinda components
 function areEqual(prevProps, nextProps) {
     return deepEqual(prevProps.restaurants, nextProps.restaurants);
 }

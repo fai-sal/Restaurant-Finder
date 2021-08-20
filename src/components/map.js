@@ -14,7 +14,7 @@ function Map({ userLocation, restaurantLocation, getCurrentLocation, setLocation
 
     useEffect(() => {
         initGoogleMap();
-    });
+    },[]);
 
     const initGoogleMap = () => {
 
@@ -111,6 +111,9 @@ function Map({ userLocation, restaurantLocation, getCurrentLocation, setLocation
 
     );
 }
+
+// for demonstration purpose React.memo isn't really very effective for these kinda components
+
 function areEqual(prevProps, nextProps) {
     return deepEqual(prevProps.restaurants, nextProps.restaurants);
 }
